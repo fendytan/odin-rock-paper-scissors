@@ -1,64 +1,103 @@
-// const computerChoiceDisplay = document.getElementById("computer-choice");
-// const userChoiceDisplay = document.getElementById("user-choice");
-// const resultDisplay = document.getElementById("result");
-// const possibleChoices = document.querySelectorAll("button");
+const result_line1_div = document.getElementById("result-line1-display");
+const result_line2_div = document.getElementById("result-line2-display");
+const playerScore_span = document.getElementById("player-score");
+const computerScore_span = document.getElementById("computer-score");
+const playerSelection_input = document.querySelectorAll("input");
+const choices_div = document.querySelector(".choices");
+const restart_div = document.querySelector(".restart");
+const restart_input = document.getElementById("restart-input");
 
-const choices = ["rock", "paper", "scissors"];
-let playerScore, computerScore;
-// let userChoice = null;
-
-// possibleChoices.forEach(possibleChoice =>
-//   possibleChoice.addEventListener("click", e => {
-//     userChoice = e.target.id;
-//     computerChoiceDisplay.innerHTML = computerPlay();
-//     userChoiceDisplay.innerHTML = userChoice;
-//     playRound(userChoice, computerChoiceDisplay.innerHTML);
-//   }),
-// );
+let playerScore = 0;
+let computerScore = 0;
 
 function computerPlay() {
+  const choices = ["rock", "paper", "scissors"];
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
 function playRound(playerSelection, computerSelection) {
-  let result;
-
   switch (playerSelection + computerSelection) {
     case "paperrock":
     case "scissorspaper":
     case "rockscissors":
-      playerScore++;
-      // resultDisplay.innerHTML = "YOU WIN";
-      result = "You Win! " + playerSelection + " beats " + computerSelection;
+      playerWon(playerSelection, computerSelection);
       break;
     case "rockpaper":
     case "paperscissors":
     case "scissorsrock":
-      computerScore++;
-      // resultDisplay.innerHTML = "YOU LOSE";
-      result = "You Lose! " + computerSelection + " beats " + playerSelection;
+      computerWon(playerSelection, computerSelection);
       break;
     case "rockrock":
     case "paperpaper":
     case "scissorsscissors":
-      // resultDisplay.innerHTML = "IT'S A DRAW";
-      result = "It's a Draw!";
+      nobodyWon(playerSelection, computerSelection);
       break;
   }
-  // return resultDisplay.innerHTML;
-  return result;
+
+  updateScoreBoard();
+  checkScore();
 }
 
-function game() {
-  const playerSelection = prompt("Rock, paper or scissors?").toLocaleLowerCase();
-  const computerSelection = computerPlay();
-  console.log("You chose " + playerSelection);
-  console.log("Computer chose " + computerSelection);
-  console.log(playRound(playerSelection, computerSelection));
+function playerWon(playerSelection, computerSelection) {
+  playerScore++;
+  result_line1_div.textContent = `Your ${playerSelection} beats my ${computerSelection}.`;
+  result_line2_div.textContent = "You Win!";
+  result_line2_div.classList.add("player-won");
 }
 
-playerScore = computerScore = 0;
-for (let i = 0; i < 5; i++) {
-  game();
-  console.log("Player score is " + playerScore + " and computer score is " + computerScore);
+function computerWon(playerSelection, computerSelection) {
+  computerScore++;
+  result_line1_div.textContent = `Your ${playerSelection} was beaten by my ${computerSelection}.`;
+  result_line2_div.textContent = "You Lost!";
+  result_line2_div.classList.add("computer-won");
 }
+
+function nobodyWon(playerSelection, computerSelection) {
+  result_line1_div.textContent = `Your ${playerSelection} was countered by my ${computerSelection}.`;
+  result_line2_div.textContent = "It's a Draw!";
+}
+
+function updateScoreBoard() {
+  playerScore_span.textContent = playerScore;
+  computerScore_span.textContent = computerScore;
+}
+
+function checkScore() {
+  if (playerScore != 5 && computerScore != 5) return;
+
+  choices_div.style.display = "none";
+  restart_div.style.display = "flex";
+
+  result_line2_div.classList.remove("player-won", "computer-won");
+
+  result_line1_div.textContent =
+    playerScore > computerScore ? "You Won This Round." : "You Lost This Round.";
+
+  result_line2_div.textContent = "Play Again?";
+}
+
+function game(e) {
+  result_line2_div.classList.remove("player-won", "computer-won");
+  playRound(e.target.id, computerPlay());
+}
+
+function replayGame() {
+  playerScore = computerScore = 0;
+  updateScoreBoard();
+
+  choices_div.style.display = "flex";
+  restart_div.style.display = "none";
+
+  result_line1_div.textContent = "First to score 5 points wins the game.";
+  result_line2_div.textContent = "Choose Your Weapon!";
+}
+
+function main() {
+  playerSelection_input.forEach(playerSelection => {
+    playerSelection.addEventListener("click", game);
+  });
+
+  restart_input.addEventListener("click", replayGame);
+}
+
+main();

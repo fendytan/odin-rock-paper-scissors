@@ -4,16 +4,54 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Odin Rock Paper Scissors</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/4c536a6bd5.js" crossorigin="anonymous"></script>
+    <title>Rock Paper Scissors Game</title>
   </head>
   <body>
-    <h2>Computer Choice: <span id="computer-choice"></span></h2>
-    <h2>Your Choice: <span id="user-choice"></span></h2>
-    <h2>Result: <span id="result"></span></h2>
+    <header class="header">
+      <h1>Rock Paper Scissors</h1>
+    </header>
 
-    <button id="rock">rock</button>
-    <button id="paper">paper</button>
-    <button id="scissors">scissors</button>
+    <div class="score-board">
+      <div class="badge" id="player-label">you</div>
+      <div class="badge" id="comp-label">comp</div>
+      <span id="player-score">0</span> - <span id="computer-score">0</span>
+    </div>
+
+    <div class="result">
+      <p id="result-line1-display">First to score 5 points wins the game.</p>
+      <p id="result-line2-display">Choose Your Weapon!</p>
+    </div>
+
+    <div class="choices">
+      <input type="image" src="./img/rock.png" class="choice" id="rock" />
+      <input type="image" src="./img/paper.png" class="choice" id="paper" />
+      <input type="image" src="./img/scissors.png" class="choice" id="scissors" />
+    </div>
+
+    <div class="restart">
+      <input type="image" src="./img/restart.png" id="restart-input" />
+    </div>
+
+    <footer class="footer">
+      <p>
+        Copyright ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        fendytan
+      </p>
+      <a href="https://github.com/fendytan" target="_blank"> <i class="fab fa-github"></i></a>
+      <p>Images from Freepik & Icons8</p>
+    </footer>
 
     <script src="./app.js"></script>
   </body>
