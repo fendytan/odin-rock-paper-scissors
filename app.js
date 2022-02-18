@@ -65,8 +65,8 @@ function updateScoreBoard() {
 function checkScore() {
   if (playerScore != 5 && computerScore != 5) return;
 
-  choices_div.style.display = "none";
-  restart_div.style.display = "flex";
+  choices_div.style.display = "none"; // Hide the rock paper scissors buttons
+  restart_div.style.display = "flex"; // Show the restart button
 
   result_line2_div.classList.remove("player-won", "computer-won");
 
@@ -85,8 +85,8 @@ function replayGame() {
   playerScore = computerScore = 0;
   updateScoreBoard();
 
-  choices_div.style.display = "flex";
-  restart_div.style.display = "none";
+  choices_div.style.display = "flex"; // Show the rock paper scissors buttons
+  restart_div.style.display = "none"; // Hide the restart button
 
   result_line1_div.textContent = "First to score 5 points wins the game.";
   result_line2_div.textContent = "Choose Your Weapon!";
