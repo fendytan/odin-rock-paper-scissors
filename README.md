@@ -1,5 +1,5 @@
 # odin-rock-paper-scissors
 
-https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/rock-paper-scissors
+Foundations Project #2 from [The Odin Project](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/rock-paper-scissors)
 
-live: https://fendytan.github.io/odin-rock-paper-scissors/
+[Live Demo](https://fendytan.github.io/odin-rock-paper-scissors/)
